@@ -1913,16 +1913,16 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "anthropic", specifier = ">=0.84.0" },
-    { name = "beautifulsoup4", specifier = ">=4.14.3" },
-    { name = "litellm", specifier = ">=1.82.0" },
-    { name = "mcp", specifier = ">=1.26.0" },
-    { name = "numpy", specifier = ">=2.4.3" },
-    { name = "openai", specifier = ">=2.26.0" },
-    { name = "pandas", specifier = ">=3.0.1" },
-    { name = "python-dotenv", specifier = ">=1.2.2" },
-    { name = "requests", specifier = ">=2.32.5" },
-    { name = "yfinance", specifier = ">=1.2.0" },
+    { name = "anthropic" },
+    { name = "beautifulsoup4" },
+    { name = "litellm" },
+    { name = "mcp" },
+    { name = "numpy" },
+    { name = "openai" },
+    { name = "pandas" },
+    { name = "python-dotenv" },
+    { name = "requests" },
+    { name = "yfinance" },
 ]
 
 [[package]]

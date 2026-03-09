@@ -1,18 +1,18 @@
 [project]
 name = "trading-bot"
 version = "0.1.0"
-description = "Add your description here"
+description = "Advanced AI Stock Trading Bot for Kite MCP"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "anthropic>=0.84.0",
-    "beautifulsoup4>=4.14.3",
-    "litellm>=1.82.0",
-    "mcp>=1.26.0",
-    "numpy>=2.4.3",
-    "openai>=2.26.0",
-    "pandas>=3.0.1",
-    "python-dotenv>=1.2.2",
-    "requests>=2.32.5",
-    "yfinance>=1.2.0",
+    "anthropic",
+    "beautifulsoup4",
+    "litellm",
+    "mcp",
+    "numpy",
+    "openai",
+    "pandas",
+    "python-dotenv",
+    "requests",
+    "yfinance",
 ]

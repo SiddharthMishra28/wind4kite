@@ -27,6 +27,10 @@ class TradingAgent:
         """
 
         research_response = self.provider.completion([{"role": "user", "content": research_prompt}])
+        if not research_response or not research_response.choices:
+            print("Error: Failed to get research response from LLM.")
+            return 0.0
+
         suggested_symbols = research_response.choices[0].message.content.strip().split(",")
         suggested_symbols = [s.strip().replace(".NS", "") for s in suggested_symbols if s.strip()]
 
@@ -40,7 +44,11 @@ class TradingAgent:
                 analysis_results.append(analysis)
 
         # 3. Decision Making
-        holdings = self.kite.get_holdings()
+        try:
+            holdings = self.kite.get_holdings()
+        except Exception as e:
+            print(f"Error fetching holdings: {e}")
+            holdings = []
 
         decision_prompt = f"""
         Strategy Goal: {target_profit_pct}% daily return.
@@ -60,6 +68,10 @@ class TradingAgent:
         """
 
         decision_response = self.provider.completion([{"role": "user", "content": decision_prompt}])
+        if not decision_response or not decision_response.choices:
+            print("Error: Failed to get decision response from LLM.")
+            return 0.0
+
         try:
             content = decision_response.choices[0].message.content
             # Clean up potential markdown blocks
@@ -74,10 +86,6 @@ class TradingAgent:
             # 4. Execution
             for action in actions:
                 symbol = action['symbol']
-                if not (symbol.endswith(".NS") or symbol.endswith(".BO")):
-                    # Kite often expects just the symbol if exchange is specified
-                    pass
-
                 print(f"ACTION: {action['action']} {action['quantity']} of {symbol}")
 
                 if not self.dry_run:
@@ -108,9 +116,7 @@ class TradingAgent:
         return cost
 
 if __name__ == "__main__":
-    # Ensure API key exists for testing
     os.environ.setdefault("OPENAI_API_KEY", "sk-dummy")
-
     provider = LLMProvider(model="gpt-4o")
     agent = TradingAgent(provider, dry_run=True)
     agent.run_trading_cycle()
